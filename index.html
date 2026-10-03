@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 6: Hoạt động của Nguyễn Ái Quốc và sự thành lập Đảng CSVN - Lịch sử & Địa lí 9</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #d9381e;
+            --primary-dark: #b52b14;
+            --secondary: #ffc107;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --success: #28a745;
+            --danger: #dc3545;
+            --info: #17a2b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+        body { background: #f0f4f8; color: var(--dark); line-height: 1.6; }
+        
+        .app-container { max-width: 900px; margin: 20px auto; background: #fff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; position: relative; }
+        
+        header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 20px 30px; text-align: center; position: relative; }
+        header h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 5px; text-transform: uppercase; }
+        header p { font-size: 0.95rem; opacity: 0.9; }
+        
+        .screen { display: none; padding: 30px; animation: fadeIn 0.4s ease-in-out; }
+        .screen.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .start-box { text-align: center; max-width: 500px; margin: 0 auto; }
+        .start-box input { width: 100%; padding: 14px; font-size: 1rem; border: 2px solid #ddd; border-radius: 8px; margin-bottom: 20px; text-align: center; outline: none; transition: 0.3s; }
+        .start-box input:focus { border-color: var(--primary); box-shadow: 0 0 8px rgba(217,56,30,0.2); }
+        .avatar-selection { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+        .avatar-option { width: 60px; height: 60px; border-radius: 50%; border: 3px solid transparent; cursor: pointer; transition: 0.3s; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .avatar-option.selected { border-color: var(--primary); transform: scale(1.1); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        
+        .btn { background: var(--primary); color: white; border: none; padding: 12px 28px; font-size: 1rem; font-weight: 700; border-radius: 8px; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(217,56,30,0.3); }
+        .btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .btn-secondary { background: var(--info); box-shadow: 0 4px 12px rgba(23,162,184,0.3); }
+        .btn-secondary:hover { background: #138496; }
+
+        .lesson-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 2px solid #eee; padding-bottom: 15px; }
+        .user-info-badge { display: flex; align-items: center; gap: 10px; background: #f8f9fa; padding: 6px 15px; border-radius: 30px; font-weight: 600; font-size: 0.9rem; border: 1px solid #e9ecef; }
+        .progress-bar-container { flex-grow: 1; margin: 0 20px; background: #e9ecef; height: 10px; border-radius: 5px; overflow: hidden; }
+        .progress-bar-fill { background: var(--success); height: 100%; width: 0%; transition: width 0.4s ease; }
+
+        h2.section-title { font-size: 1.3rem; color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .poem-box { background: #fff8e1; border-left: 5px solid var(--secondary); padding: 15px 20px; font-style: italic; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        
+        .quiz-option { background: #fff; border: 2px solid #cbd5e0; padding: 12px 18px; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; font-weight: 500; }
+        .quiz-option:hover { border-color: var(--primary); background: #fff5f5; }
+        .quiz-option.correct { background: #d4edda !important; border-color: var(--success) !important; color: #155724; }
+        .quiz-option.incorrect { background: #f8d7da !important; border-color: var(--danger) !important; color: #721c24; }
+        .feedback { margin-top: 10px; font-weight: 600; padding: 10px; border-radius: 6px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.success { background: #d4edda; color: var(--success); }
+        .feedback.error { background: #f8d7da; color: var(--danger); }
+
+        .badge-display { font-size: 4rem; margin: 15px 0; animation: bounce 1s infinite alternate; }
+        @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+        .score-board { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
+        .action-footer { display: flex; justify-content: space-between; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <header>
+        <h1>Lịch sử và Địa lí 9 - Bài 6</h1>
+        <p>Hoạt động của Nguyễn Ái Quốc và sự thành lập Đảng Cộng sản Việt Nam</p>
+    </header>
+
+    <!-- MÀN HÌNH 1: ĐĂNG NHẬP -->
+    <div id="screen-start" class="screen active">
+        <div class="start-box">
+            <div style="font-size: 3.5rem; color: var(--primary); margin-bottom: 15px;"><i class="fas fa-landmark"></i></div>
+            <h2 style="margin-bottom: 10px; color: var(--dark);">Khám phá Bài học Tương tác</h2>
+            <p style="margin-bottom: 25px; color: #666;">Nhập tên của em và chọn biểu tượng để bắt đầu hành trình!</p>
+            
+            <div class="avatar-selection">
+                <div class="avatar-option selected" onclick="selectAvatar('👦', this)">👦</div>
+                <div class="avatar-option" onclick="selectAvatar('👧', this)">👧</div>
+                <div class="avatar-option" onclick="selectAvatar('⭐', this)">⭐</div>
+                <div class="avatar-option" onclick="selectAvatar('📖', this)">📖</div>
+            </div>
+
+            <input type="text" id="student-name" placeholder="Nhập họ và tên của em..." autocomplete="off">
+            <br>
+            <button class="btn" onclick="startApp()"><i class="fas fa-play-circle"></i> Bắt đầu hành trình</button>
+        </div>
+    </div>
+
+    <!-- MÀN HÌNH 2: KHỞI ĐỘNG -->
+    <div id="screen-intro" class="screen">
+        <div class="lesson-nav">
+            <div class="user-info-badge"><span id="display-avatar">👦</span> <span id="display-name">Học sinh</span></div>
+            <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 10%;"></div></div>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #666;">Bước 1/5</span>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-bolt"></i> Phần Khởi động: Theo dòng lịch sử</h2>
+        <div class="card">
+            <p>Đọc đoạn thơ miêu tả rất xúc động về một sự kiện trong hành trình đi tìm đường cứu nước của Nguyễn Ái Quốc[cite: 1]:</p>
+            <div class="poem-box">
+                “Luận cương đến Bác Hồ. Và Người đã khóc<br>
+                Bác reo lên một mình như nói cùng dân tộc[cite: 1]<br>
+                Cơm áo là đây! Hạnh phúc đây rồi!”<br>
+                <small style="display: block; text-align: right; margin-top: 5px; font-weight: 600;">(Trích <em>Người đi tìm hình của nước</em> – Chế Lan Viên)[cite: 1]</small>
+            </div>
+            <p><strong>Câu hỏi:</strong> Theo em, "Luận cương" ở đây nhắc tới tác phẩm nào của V.I. Lê-nin?</p>
+            
+            <div class="quiz-option" onclick="checkIntro(this, false)">A. Luận cương về kinh tế chính trị học.</div>
+            <div class="quiz-option" onclick="checkIntro(this, true)">B. Sơ thảo lần thứ nhất những luận cương về vấn đề dân tộc và vấn đề thuộc địa của Lê-nin[cite: 1].</div>
+            <div class="quiz-option" onclick="checkIntro(this, false)">C. Luận cương chính trị năm 1930 của Đảng.</div>
+            
+            <div id="intro-feedback" class="feedback"></div>
+        </div>
+
+        <div class="action-footer">
+            <div></div>
+            <button class="btn" id="next-to-explore" style="display:none;" onclick="goToScreen('screen-explore')">Tiếp tục khám phá <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <!-- MÀN HÌNH 3: KHÁM PHÁ KIẾN THỨC -->
+    <div id="screen-explore" class="screen">
+        <div class="lesson-nav">
+            <div class="user-info-badge"><span id="display-avatar-2">👦</span> <span id="display-name-2">Học sinh</span></div>
+            <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 30%;"></div></div>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #666;">Bước 2/5</span>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-book-open"></i> Kiến thức trọng tâm</h2>
+        
+        <div class="card" style="background: #fdfefe; border-left: 4px solid var(--primary);">
+            <h3 style="color: var(--primary); margin-bottom: 8px;"><i class="fas fa-flag"></i> 1. Hoạt động của Nguyễn Ái Quốc (1918 - 1930)</h3>
+            <ul style="padding-left: 20px; font-size: 0.95rem; display: flex; flex-direction: column; gap: 8px;">
+                <li><strong>Tại Pháp (1919 - 1923):</strong> Gửi Bản yêu sách tới Hội nghị Véc-xây (1919), đọc Luận cương của Lê-nin (1920), tham gia sáng lập Đảng Cộng sản Pháp[cite: 1].</li>
+                <li><strong>Tại Liên Xô & Trung Quốc (1923 - 1927):</strong> Thành lập Hội Việt Nam Cách mạng Thanh niên tại Quảng Châu (1925) để chuẩn bị về chính trị, tư tưởng và tổ chức[cite: 1, 2].</li>
+            </ul>
+        </div>
+
+        <div class="card" style="background: #fdfefe; border-left: 4px solid var(--success);">
+            <h3 style="color: var(--success); margin-bottom: 8px;"><i class="fas fa-users"></i> 2. Sự thành lập Đảng Cộng sản Việt Nam (1930)</h3>
+            <ul style="padding-left: 20px; font-size: 0.95rem; display: flex; flex-direction: column; gap: 8px;">
+                <li><strong>Ba tổ chức cộng sản ra đời (1929):</strong> Đông Dương Cộng sản đảng, An Nam Cộng sản đảng và Đông Dương Cộng sản liên đoàn[cite: 2].</li>
+                <li><strong>Hội nghị thành lập Đảng (Đầu năm 1930):</strong> Dưới sự chủ trì của Nguyễn Ái Quốc tại Hương Cảng, thống nhất các tổ chức cộng sản thành <strong>Đảng Cộng sản Việt Nam</strong>[cite: 2].</li>
+            </ul>
+        </div>
+
+        <div class="action-footer">
+            <button class="btn btn-secondary" onclick="goToScreen('screen-intro')"><i class="fas fa-arrow-left"></i> Quay lại</button>
+            <button class="btn" onclick="goToScreen('screen-activities')">Làm bài tập tương tác <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <!-- MÀN HÌNH 4: HOẠT ĐỘNG TƯƠNG TÁC -->
+    <div id="screen-activities" class="screen">
+        <div class="lesson-nav">
+            <div class="user-info-badge"><span id="display-avatar-3">👦</span> <span id="display-name-3">Học sinh</span></div>
+            <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 60%;"></div></div>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #666;">Bước 3/5</span>
+        </div>
+
+        <h2 class="section-title"><i class="fas fa-puzzle-piece"></i> Thử thách tương tác kiến thức</h2>
+
+        <div class="card">
+            <h4 style="margin-bottom: 10px;">Hoạt động 1: Nhận định Đúng hay Sai?</h4>
+            <p><em>Phát biểu: "Nguyễn Ái Quốc tham gia sáng lập Đảng Cộng sản Pháp vào tháng 12 năm 1920."</em>[cite: 1]</p>
+            <div style="display: flex; gap: 15px; margin-top: 10px;">
+                <button class="btn" style="flex:1; background:var(--success);" onclick="checkTrueFalse(true, this)">Đúng</button>
+                <button class="btn" style="flex:1; background:var(--danger);" onclick="checkTrueFalse(false, this)">Sai</button>
+            </div>
+            <div id="act1-fb" class="feedback"></div>
+        </div>
+
+        <div class="card">
+            <h4 style="margin-bottom: 10px;">Hoạt động 2: Điền từ</h4>
+            <p>Tháng 6 - 1925, Nguyễn Ái Quốc đã thành lập tổ chức <input type="text" id="blank-word" placeholder="Nhập tên tổ chức..." style="padding: 6px; border: 1px solid #ccc; border-radius: 4px; width: 220px;"> tại Quảng Châu[cite: 2].</p>
+            <button class="btn" style="margin-top: 10px; padding: 6px 15px; font-size: 0.9rem;" onclick="checkFillWord()">Kiểm tra</button>
+            <div id="act2-fb" class="feedback"></div>
+        </div>
+
+        <div class="action-footer">
+            <button class="btn btn-secondary" onclick="goToScreen('screen-explore')"><i class="fas fa-arrow-left"></i> Quay lại</button>
+            <button class="btn" onclick="goToScreen('screen-game')">Vào Game Thử Thách <i class="fas fa-gamepad"></i></button>
+        </div>
+    </div>
+
+    <!-- MÀN HÌNH 5: GAME CHALLENGE -->
+    <div id="screen-game" class="screen">
+        <div class="lesson-nav">
+            <div class="user-info-badge"><span id="display-avatar-4">👦</span> Điểm: <span id="current-score" style="color:var(--primary);">0</span></div>
+            <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 85%;"></div></div>
+            <span style="font-size: 0.85rem; font-weight: 700; color: #666;">Thử thách (Câu <span id="q-current">1</span>/5)</span>
+        </div>
+
+        <div id="quiz-container" class="card">
+            <h3 id="question-text" style="margin-bottom: 15px; font-size: 1.1rem; color: var(--dark);">Nội dung câu hỏi...</h3>
+            <div id="answers-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+            <div id="game-feedback" class="feedback"></div>
+        </div>
+
+        <div class="action-footer">
+            <div></div>
+            <button class="btn" id="btn-next-question" style="display: none;" onclick="nextQuestion()">Câu hỏi tiếp theo <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <!-- MÀN HÌNH 6: TỔNG KẾT -->
+    <div id="screen-result" class="screen" style="text-align: center;">
+        <div class="badge-display" id="result-badge">🏆</div>
+        <h2 style="color: var(--primary); margin-bottom: 10px;">Chúc mừng em đã hoàn thành bài học!</h2>
+        <div class="score-board">Tổng điểm của em: <span id="final-score">0</span> / 5 điểm</div>
+        <p id="result-comment" style="margin-bottom: 25px; color: #666; font-size: 1.05rem;"></p>
+        <button class="btn" onclick="restartApp()"><i class="fas fa-redo"></i> Chơi lại từ đầu</button>
+    </div>
+</div>
+
+<script>
+    let studentData = { name: "Học sinh", avatar: "👦", score: 0 };
+
+    function selectAvatar(emoji, el) {
+        document.querySelectorAll('.avatar-option').forEach(item => item.classList.remove('selected'));
+        el.classList.add('selected');
+        studentData.avatar = emoji;
+    }
+
+    function startApp() {
+        const nameInput = document.getElementById('student-name').value.trim();
+        if (nameInput) studentData.name = nameInput;
+        ['display-avatar', 'display-avatar-2', 'display-avatar-3', 'display-avatar-4'].forEach(id => {
+            document.getElementById(id).innerText = studentData.avatar;
+        });
+        ['display-name', 'display-name-2', 'display-name-3'].forEach(id => {
+            document.getElementById(id).innerText = studentData.name;
+        });
+        goToScreen('screen-intro');
+    }
+
+    function goToScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(screenId).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function checkIntro(el, isCorrect) {
+        const fb = document.getElementById('intro-feedback');
+        if (isCorrect) {
+            el.classList.add('correct');
+            fb.className = "feedback show success";
+            fb.innerHTML = "🎉 Chính xác! Đó chính là bản Sơ thảo Luận cương của Lê-nin[cite: 1].";
+            document.getElementById('next-to-explore').style.display = 'inline-flex';
+        } else {
+            el.classList.add('incorrect');
+            fb.className = "feedback show error";
+            fb.innerHTML = "❌ Chưa chính xác. Em hãy thử lại nhé!";
+        }
+    }
+
+    function checkTrueFalse(isTrue, el) {
+        const fb = document.getElementById('act1-fb');
+        if (isTrue) {
+            fb.className = "feedback show success";
+            fb.innerHTML = "🎉 Chính xác! Tháng 12/1920, Nguyễn Ái Quốc tham gia sáng lập Đảng Cộng sản Pháp[cite: 1].";
+        } else {
+            fb.className = "feedback show error";
+            fb.innerHTML = "❌ Chưa chính xác. Hãy nhớ lại Đại hội Tua năm 1920[cite: 1]!";
+        }
+    }
+
+    function checkFillWord() {
+        const val = document.getElementById('blank-word').value.trim().toLowerCase();
+        const fb = document.getElementById('act2-fb');
+        if (val.includes("thanh niên") || val.includes("hội việt nam cách mạng thanh niên")) {
+            fb.className = "feedback show success";
+            fb.innerHTML = "🎉 Tuyệt vời! Đó là Hội Việt Nam Cách mạng Thanh niên[cite: 2].";
+        } else {
+            fb.className = "feedback show error";
+            fb.innerHTML = "❌ Gợi ý: Tổ chức này là Hội Việt Nam Cách mạng Thanh niên[cite: 2].";
+        }
+    }
+
+    const questions = [
+        { q: "Tháng 6 - 1919, Nguyễn Ái Quốc gửi bản yêu sách tới Hội nghị nào?", options: ["Hội nghị Véc-xây", "Hội nghị Giơ-ne-vơ", "Đại hội Tua", "Đại hội Quốc tế Cộng sản"], correct: 0 },
+        { q: "Tác phẩm 'Đường Kách mệnh' xuất bản vào năm nào?", options: ["Năm 1925", "Năm 1927", "Năm 1924", "Năm 1930"], correct: 1 },
+        { q: "Ba tổ chức cộng sản lần lượt ra đời năm 1929 ở Việt Nam là?", options: ["Đông Dương CSĐ, An Nam CSĐ, Đông Dương CS liên đoàn[cite: 2]", "Tân Việt, Việt Nam thanh niên, Đảng CSVN", "Hội VN CMXT, Đông Dương CSĐ, Tân Việt", "Đảng Xã hội, Đảng CS Pháp, Quốc tế Cộng sản"], correct: 0 },
+        { q: "Hội nghị thành lập Đảng Cộng sản Việt Nam (đầu năm 1930) diễn ra ở đâu?", options: ["Quảng Châu", "Hương Cảng[cite: 2]", "Hà Nội", "Pác Bó"], correct: 1 },
+        { q: "Sự ra đời của Đảng Cộng sản Việt Nam có ý nghĩa lịch sử gì?", options: ["Chấm dứt khủng hoảng về đường lối cứu nước[cite: 2]", "Đưa nước ta thành nước phát triển", "Hoàn thành cách mạng ruộng đất", "Lật đổ chủ nghĩa phát xít"], correct: 0 }
+    ];
+
+    let currentQIndex = 0, gameScore = 0;
+
+    function initGame() {
+        currentQIndex = 0; gameScore = 0;
+        document.getElementById('current-score').innerText = gameScore;
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        const q = questions[currentQIndex];
+        document.getElementById('q-current').innerText = currentQIndex + 1;
+        document.getElementById('question-text').innerText = q.q;
+        document.getElementById('btn-next-question').style.display = 'none';
+        const listEl = document.getElementById('answers-list');
+        listEl.innerHTML = '';
+        document.getElementById('game-feedback').className = 'feedback';
+
+        q.options.forEach((opt, index) => {
+            const div = document.createElement('div');
+            div.className = 'quiz-option';
+            div.innerText = opt;
+            div.onclick = () => selectGameAnswer(index, q.correct, div);
+            listEl.appendChild(div);
+        });
+    }
+
+    function selectGameAnswer(selectedIndex, correctIndex, el) {
+        const options = document.querySelectorAll('#answers-list .quiz-option');
+        options.forEach(o => o.style.pointerEvents = 'none');
+        const fb = document.getElementById('game-feedback');
+        if (selectedIndex === correctIndex) {
+            el.classList.add('correct');
+            fb.className = "feedback show success";
+            fb.innerHTML = "🎉 Chính xác! (+1 điểm)";
+            gameScore++;
+            document.getElementById('current-score').innerText = gameScore;
+        } else {
+            el.classList.add('incorrect');
+            options[correctIndex].classList.add('correct');
+            fb.className = "feedback show error";
+            fb.innerHTML = "❌ Chưa chính xác!";
+        }
+        if (currentQIndex < questions.length - 1) {
+            document.getElementById('btn-next-question').style.display = 'inline-flex';
+        } else {
+            setTimeout(showResultScreen, 1500);
+        }
+    }
+
+    function nextQuestion() { currentQIndex++; loadQuestion(); }
+
+    function showResultScreen() {
+        goToScreen('screen-result');
+        document.getElementById('final-score').innerText = gameScore;
+        const comment = document.getElementById('result-comment'), badge = document.getElementById('result-badge');
+        if (gameScore === 5) {
+            badge.innerText = "🏆"; comment.innerText = `Xuất sắc quá ${studentData.name} ơi! Điểm tuyệt đối 5/5!`;
+        } else {
+            badge.innerText = "🥈"; comment.innerText = `Làm tốt lắm ${studentData.name}! Em đạt ${gameScore}/5 điểm.`;
+        }
+    }
+
+    function restartApp() { initGame(); goToScreen('screen-start'); }
+    window.onload = () => { initGame(); };
+</script>
+</body>
+</html>
